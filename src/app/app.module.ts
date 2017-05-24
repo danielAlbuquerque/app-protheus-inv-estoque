@@ -12,13 +12,16 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpModule } from "@angular/http";
 import { BarcodeScanner } from "@ionic-native/barcode-scanner";
+import { ProdutoService } from "../providers/produto-service";
+import { ColetarPage } from "../pages/coletar/coletar";
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     ConfigPage,
-    LoginPage
+    LoginPage,
+    ColetarPage
   ],
   imports: [
     BrowserModule,
@@ -30,12 +33,14 @@ import { BarcodeScanner } from "@ionic-native/barcode-scanner";
     MyApp,
     HomePage,
     ConfigPage,
-    LoginPage
+    LoginPage,
+    ColetarPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     BarcodeScanner,
+    ProdutoService,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthService
   ]

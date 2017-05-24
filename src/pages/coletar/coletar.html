@@ -1,0 +1,60 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Coletor</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list padding>
+    <ion-item>
+      <ion-label stacked>Cód.:</ion-label>
+      <ion-input [value]="produto?.codigo" disabled type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Produto:</ion-label>
+      <ion-input [value]="produto?.descricao" disabled type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Tipo:</ion-label>
+      <ion-input [value]="produto?.tipo" disabled type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Filial:</ion-label>
+      <ion-select [(ngModel)]="filial">
+        <ion-option value="01">01 - SANTANA</ion-option>
+        <ion-option value="02">02 - TARTARUGUALZINHO</ion-option>
+        <ion-option value="04">04 - PORTO GDE KM 78</ion-option>
+        <ion-option value="05">05 - PORTO GDE KM 97</ion-option>
+        <ion-option value="07">07 - FILIAL 07</ion-option>
+        <ion-option value="08">08 - PORTO GDE KM 70</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Documento:</ion-label>
+      <ion-input [(ngModel)]="documento" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Armazem:</ion-label>
+      <ion-input [(ngModel)]="armazem" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Endereço:</ion-label>
+      <ion-input [(ngModel)]="endereco" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Qtd:</ion-label>
+      <ion-input [(ngModel)]="qtd" type="number"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Qtd Seg. UM.:</ion-label>
+      <ion-input [(ngModel)]="qtd2" type="number"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <div padding>
+    <button (click)="save()" ion-button color="secondary" block>Salvar</button>
+  </div>
+</ion-content>
