@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Endereco do servidor</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+      <ion-item>
+        <ion-label stacked>URL do servidor:</ion-label>
+        <ion-input [(ngModel)]="URI" type="url"></ion-input>
+      </ion-item>
+  </ion-list>
+  <div>
+    <button (click)="save()" ion-button block color="primary">Salvar</button>
+  </div>
+</ion-content>
+

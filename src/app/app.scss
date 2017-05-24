@@ -1,0 +1,29 @@
+.ion-item::after { 
+    border-bottom-color: transparent !important; 
+}
+
+.ion-input::after { 
+    border-bottom-color: transparent !important; 
+}
+
+.item-md.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner {
+  border-bottom-color: #e1e2ed;
+  box-shadow: inset 0 -1px 0 0 #e1e2ed;
+}
+
+.list-md .item-input.ng-valid.input-has-value:not(.input-has-focus):last-child {
+  border-bottom-color: #e1e2ed;
+  box-shadow: inset 0 -1px 0 0 #e1e2ed;
+}
+
+
+ion-item.item-input {
+  padding-left: 0;
+}
+
+.truncate {
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

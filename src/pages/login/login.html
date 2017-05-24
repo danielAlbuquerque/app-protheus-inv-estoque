@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Inventario</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content scroll="false">
+  <ion-list padding>
+      <form [formGroup]="frmLogin" (ngSubmit)="login()">
+          <ion-item>
+              <ion-label stacked>Usuario:</ion-label>
+              <ion-input formControlName="username" type="text"></ion-input>
+          </ion-item>
+          <ion-item>
+              <ion-label stacked>Senha:</ion-label>
+              <ion-input formControlName="password" type="password"></ion-input>
+          </ion-item>
+
+          <div padding-top>
+              <button ion-button full color="primary" type="submit">Login</button>
+          </div>
+      </form>
+        <div padding-top text-center>
+            <button (click)="config()" ion-button clear> Configurar servidor </button>
+        </div>
+  </ion-list>
+
+</ion-content>
