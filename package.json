@@ -23,6 +23,7 @@
     "@ionic-native/barcode-scanner": "^3.10.3",
     "@ionic-native/core": "3.7.0",
     "@ionic-native/splash-screen": "3.7.0",
+    "@ionic-native/sqlite": "^3.10.3",
     "@ionic-native/status-bar": "3.7.0",
     "@ionic/storage": "2.0.1",
     "cordova-android": "^6.2.3",
@@ -51,7 +52,8 @@
     "cordova-plugin-device",
     "cordova-plugin-splashscreen",
     "ionic-plugin-keyboard",
-    "phonegap-plugin-barcodescanner"
+    "phonegap-plugin-barcodescanner",
+    "cordova-sqlite-storage"
   ],
   "cordovaPlatforms": [],
   "description": "app_inv_est: An Ionic project",

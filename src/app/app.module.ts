@@ -14,6 +14,8 @@ import { HttpModule } from "@angular/http";
 import { BarcodeScanner } from "@ionic-native/barcode-scanner";
 import { ProdutoService } from "../providers/produto-service";
 import { ColetarPage } from "../pages/coletar/coletar";
+import { SQLite } from '@ionic-native/sqlite';
+import { CargaService } from "../providers/carga-service";
 
 @NgModule({
   declarations: [
@@ -40,9 +42,11 @@ import { ColetarPage } from "../pages/coletar/coletar";
     StatusBar,
     SplashScreen,
     BarcodeScanner,
+    SQLite,
     ProdutoService,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthService
+    AuthService,
+    CargaService
   ]
 })
 export class AppModule {}

@@ -5,6 +5,7 @@ import { NavController, Platform, AlertController, LoadingController } from 'ion
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { ProdutoService } from "../../providers/produto-service";
 import { ColetarPage } from "../coletar/coletar";
+import { CargaService } from "../../providers/carga-service";
 
 @Component({
   selector: 'page-home',
@@ -18,7 +19,8 @@ export class HomePage {
 		private platform: Platform, 
 		private alertCtrl: AlertController,
 		private prodService: ProdutoService,
-		private loadingCtrl: LoadingController
+		private loadingCtrl: LoadingController,
+		private cargaService: CargaService
 	) {
 
   	}
@@ -84,6 +86,37 @@ export class HomePage {
   		});
   		alert.present();
 		
+	}
+
+	updCadastro() {
+		this.alertCtrl.create({
+			title: "Atualizar",
+    		subTitle: 'Deseja atualizar a base de dados?',
+    		buttons: [
+				{
+					text: 'Não',
+					role: 'cancel',
+					handler: () => {
+						console.log('Cancel clicked');
+					}
+				},
+				{
+					text: 'Sim',
+					handler: () => {
+						let loader =  this.loadingCtrl.create({content: "Atualizando a base de dados, isso pode levar algum tempo..."});
+						loader.present();
+						this.cargaService.initCarga().then(res => {
+							console.log(res);
+							console.log("Carga realizada com sucesso");
+							loader.dismiss();
+						}).catch(err => {
+							loader.dismiss();
+							console.log("ERRO:", err);
+						})
+					}
+				}
+    		]
+  		}).present();
 	}
 
 }
