@@ -145,17 +145,17 @@ export class CargaService {
         db.transaction((tx) => {
           for(let i=0; i<rows.length; i++) {
             console.log(rows[i]);
-            // tx.executeSql('INSERT INTO produtos(filial, codigo, descricao) VALUES(?,?,?)', [
-            //   rows[i].filial,
-            //   rows[i].codigo,
-            //   rows[i].descricao,
-            // ]);
+            tx.executeSql('INSERT INTO produtos(filial, codigo, descricao) VALUES(?,?,?)', [
+              rows[i].filial,
+              rows[i].codigo,
+              rows[i].descricao,
+            ]);
           }
         }).then(res => {
           console.log(res);
-          // db.executeSql('select * from produtos', []).then(data => {
-          //   console.log(data.rows);
-          // });
+          db.executeSql('select * from produtos', []).then(data => {
+            console.log(data.rows);
+          });
           resolve(true);
         }).catch(err => {
           console.log(err);
