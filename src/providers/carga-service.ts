@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/forkJoin';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/observable/forkJoin';
+
 
 
 @Injectable()

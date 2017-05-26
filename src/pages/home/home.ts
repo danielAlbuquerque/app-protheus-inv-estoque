@@ -25,6 +25,46 @@ export class HomePage {
 
   	}
 
+	digitar() {
+		let prompt = this.alertCtrl.create({
+			title: 'Produto',
+			message: "Digite o código do produto",
+			inputs: [
+				{
+					name: 'codigo',
+					placeholder: ''
+				},
+			],
+			buttons: [
+				{
+					text: 'Cancelar'
+				},
+				{
+					text: 'Confirmar',
+					handler: data => {
+						console.log(data);
+						let load = this.loadingCtrl.create({content: 'Aguarde'});
+						load.present();
+						this.prodService.findByCod(data.codigo).then((rs: any) => {
+							console.log(rs);
+							load.dismiss();
+							rs.codigo = data.codigo;
+							this.navCtrl.push(ColetarPage, {produto: rs});
+						}).catch(err => {
+							load.dismiss();
+							let alert = this.alertCtrl.create({
+								title: 'Erro',
+								subTitle: err,
+								buttons: ['OK']
+							}).present();
+						});
+					}
+				}
+			]
+		});
+		prompt.present();
+	}
+
 	read() {
 		this.platform.ready().then(() => { 
 			this.barcodeScanner.scan().then((barcode) => {
@@ -33,11 +73,11 @@ export class HomePage {
 					console.log(barcode.text);
 					let load = this.loadingCtrl.create({content: 'Aguarde'});
 					load.present();
-					this.prodService.getProd(barcode.text).then((rs: any) => {
+					this.prodService.findByCod(barcode.text).then((rs: any) => {
 						console.log(rs);
 						load.dismiss();
-                  rs.codigo = barcode.text;
-                  this.navCtrl.push(ColetarPage, {produto: rs});
+                  		rs.codigo = barcode.text;
+                  		this.navCtrl.push(ColetarPage, {produto: rs});
 					}).catch(err => {
 						load.dismiss();
 						let alert = this.alertCtrl.create({

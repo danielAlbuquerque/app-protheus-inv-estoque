@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
+import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import 'rxjs/add/operator/map';
 
 @Injectable()
 export class ProdutoService {
 
-  constructor(public http: Http) {
-    
+  private db: SQLiteObject;
+
+  constructor(public http: Http, private sqlite: SQLite ) {
+    this.sqlite.create({name: 'siga.db' }).then(db => this.db = db );
   }
 
 
@@ -29,6 +32,26 @@ export class ProdutoService {
           reject(err);
         });
       }
+    });
+  }
+
+  findByCod(code: string) {
+    console.log("findByCod:", code);
+    return new Promise((resolve, reject) => {
+      this.sqlite.create({name: 'siga.db', location: 'default' }).then(db => {
+        db.executeSql("SELECT * FROM produtos WHERE codigo = ?", [code]).then(result);
+        function result(rs) {
+          console.log(rs.rows);
+          if(rs.rows.length > 0) {
+            resolve({
+              codigo: code,
+              descricao: rs.rows.item(0).descricao
+            });
+          } else {
+            reject("Produto não encontrado");
+          }
+        }
+      });
     });
   }
 
