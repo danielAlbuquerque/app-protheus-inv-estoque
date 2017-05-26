@@ -1,6 +1,6 @@
 # SETUP
 
-npm install
-ionic platform add android
-ionic state reset
-ionic build android
+npm install <br>
+ionic platform add android <br>
+ionic state reset <br>
+ionic build android <br>
