@@ -10,12 +10,8 @@
 <ion-content>
   <ion-list padding>
     <ion-item>
-      <ion-label stacked>Cód.:</ion-label>
-      <ion-input [value]="produto?.codigo" disabled type="text"></ion-input>
-    </ion-item>
-    <ion-item>
       <ion-label stacked>Produto:</ion-label>
-      <ion-input [value]="produto?.descricao" disabled type="text"></ion-input>
+      <ion-input [value]="produto?.codigo + ' - ' + produto?.descricao" disabled type="text"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>Tipo:</ion-label>
@@ -24,12 +20,7 @@
     <ion-item>
       <ion-label stacked>Filial:</ion-label>
       <ion-select [(ngModel)]="filial">
-        <ion-option value="01">01 - SANTANA</ion-option>
-        <ion-option value="02">02 - TARTARUGUALZINHO</ion-option>
-        <ion-option value="04">04 - PORTO GDE KM 78</ion-option>
-        <ion-option value="05">05 - PORTO GDE KM 97</ion-option>
-        <ion-option value="07">07 - FILIAL 07</ion-option>
-        <ion-option value="08">08 - PORTO GDE KM 70</ion-option>
+        <ion-option *ngFor="let f of filiais" [value] = "f.cod_filial">{{f.nome}} - {{f.cod_filial}} - {{f.filial}}</ion-option>
       </ion-select>
     </ion-item>
     <ion-item>
@@ -38,7 +29,9 @@
     </ion-item>
     <ion-item>
       <ion-label stacked>Armazem:</ion-label>
-      <ion-input [(ngModel)]="armazem" type="text"></ion-input>
+      <ion-select [(ngModel)]="produto.locpad">
+        <ion-option *ngFor="let a of armazens" [value] = "a.local">{{a.local}}</ion-option>
+      </ion-select>
     </ion-item>
     <ion-item>
       <ion-label stacked>Endereço:</ion-label>

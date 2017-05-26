@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Sincronizar</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let row of rows" (press)="excluir($event, row.id)" (tap)="sync($event, row.id)">
+      <p>{{row.codigo}}</p>
+      <h3>Filial: {{row.filial}}</h3>
+      <h3>Doc.: {{row.doc}}</h3>
+      <h3>Qtd.: {{row.qtd}}</h3>
+      <h3>Endereço: {{row.endereco}}</h3>
+    </ion-item>
+  </ion-list>
+</ion-content>

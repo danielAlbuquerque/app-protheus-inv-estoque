@@ -6,6 +6,8 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { ProdutoService } from "../../providers/produto-service";
 import { ColetarPage } from "../coletar/coletar";
 import { CargaService } from "../../providers/carga-service";
+import { ListPage } from "../list/list";
+import { SincronizarPage } from "../sincronizar/sincronizar";
 
 @Component({
   selector: 'page-home',
@@ -26,7 +28,7 @@ export class HomePage {
   	}
 
 	digitar() {
-		let prompt = this.alertCtrl.create({
+		this.alertCtrl.create({
 			title: 'Produto',
 			message: "Digite o código do produto",
 			inputs: [
@@ -48,11 +50,11 @@ export class HomePage {
 						this.prodService.findByCod(data.codigo).then((rs: any) => {
 							console.log(rs);
 							load.dismiss();
-							rs.codigo = data.codigo;
+							rs.codigo = data.codigo.trim();
 							this.navCtrl.push(ColetarPage, {produto: rs});
 						}).catch(err => {
 							load.dismiss();
-							let alert = this.alertCtrl.create({
+							this.alertCtrl.create({
 								title: 'Erro',
 								subTitle: err,
 								buttons: ['OK']
@@ -61,8 +63,7 @@ export class HomePage {
 					}
 				}
 			]
-		});
-		prompt.present();
+		}).present();
 	}
 
 	read() {
@@ -76,11 +77,11 @@ export class HomePage {
 					this.prodService.findByCod(barcode.text).then((rs: any) => {
 						console.log(rs);
 						load.dismiss();
-                  		rs.codigo = barcode.text;
+                  		rs.codigo = barcode.text.trim();
                   		this.navCtrl.push(ColetarPage, {produto: rs});
 					}).catch(err => {
 						load.dismiss();
-						let alert = this.alertCtrl.create({
+						this.alertCtrl.create({
 							title: 'Erro',
 							subTitle: err,
 							buttons: ['OK']
@@ -90,73 +91,21 @@ export class HomePage {
 				
 			}).catch(err => {
 				console.log(err);
-				let alert = this.alertCtrl.create({
+				this.alertCtrl.create({
 					title: 'Erro',
 					subTitle: 'Nao foi possivel acessar a camera do celular',
 					buttons: ['OK']
-				});
-  				alert.present();
+				}).present();
 			});
 		});
   	}
 
-	config() {
-		this.navCtrl.push(ConfigPage);
+	registros() {
+		this.navCtrl.push(SincronizarPage);
 	}
 
-	logoff() {
-		let alert = this.alertCtrl.create({
-    		subTitle: 'Deseja realmente sair?',
-    		buttons: [
-				{
-					text: 'Cancelar',
-					role: 'cancel',
-					handler: () => {
-						console.log('Cancel clicked');
-					}
-				},
-				{
-					text: 'Sair',
-					handler: () => {
-						localStorage.removeItem('token');
-						this.navCtrl.setRoot(LoginPage);
-					}
-				}
-    		]
-  		});
-  		alert.present();
-		
-	}
+	
 
-	updCadastro() {
-		this.alertCtrl.create({
-			title: "Atualizar",
-    		subTitle: 'Deseja atualizar a base de dados?',
-    		buttons: [
-				{
-					text: 'Não',
-					role: 'cancel',
-					handler: () => {
-						console.log('Cancel clicked');
-					}
-				},
-				{
-					text: 'Sim',
-					handler: () => {
-						let loader =  this.loadingCtrl.create({content: "Atualizando a base de dados, isso pode levar algum tempo..."});
-						loader.present();
-						this.cargaService.initCarga().then(res => {
-							console.log(res);
-							console.log("Carga realizada com sucesso");
-							loader.dismiss();
-						}).catch(err => {
-							loader.dismiss();
-							console.log("ERRO:", err);
-						})
-					}
-				}
-    		]
-  		}).present();
-	}
+	
 
 }

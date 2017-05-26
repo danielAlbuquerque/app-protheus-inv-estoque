@@ -1,1 +1,27 @@
+<ion-menu [content]="content">
+    <ion-header>
+        <ion-toolbar color="primary">
+        <ion-title>Menu</ion-title>
+        </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+        <ion-list>
+        <button menuClose ion-item (click)="inicio()" icon-left>
+            Inicio
+        </button>
+        <button menuClose ion-item (click)="updCadastro()" icon-left>
+            Atualizar dados
+        </button>
+        <button menuClose ion-item (click)="config()" icon-left>
+            Conexão
+        </button>
+        <button menuClose ion-item (click)="logout()" icon-left>
+            Sair
+        </button>
+        </ion-list>
+    </ion-content>
+
+</ion-menu>
+
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

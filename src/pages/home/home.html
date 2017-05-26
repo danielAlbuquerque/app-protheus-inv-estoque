@@ -1,14 +1,17 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>Inventario de estoque</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Inventário de estoque</ion-title>
   </ion-navbar>
+
 </ion-header>
+
 
 <ion-content padding>
   <button (click)="read()" ion-button color="secondary" block>Ler codigo de barra</button>
   <button (click)="digitar()" ion-button color="secondary" block>Digitar codigo do produto</button>
-  <button (click)="updCadastro()" ion-button color="secondary" block>Atualizar cadastro</button>
-  <button (click)="config()" ion-button color="secondary" block>Configuracao</button>
-  <button (click)="logoff()" ion-button color="secondary" block>Sair</button>
+  <button (click)="registros()" ion-button color="secondary" block>Sincronizar</button>
 </ion-content>
 

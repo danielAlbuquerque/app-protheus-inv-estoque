@@ -16,6 +16,8 @@ import { ProdutoService } from "../providers/produto-service";
 import { ColetarPage } from "../pages/coletar/coletar";
 import { SQLite } from '@ionic-native/sqlite';
 import { CargaService } from "../providers/carga-service";
+import { ListPage } from "../pages/list/list";
+import { SincronizarPage } from "../pages/sincronizar/sincronizar";
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { CargaService } from "../providers/carga-service";
     HomePage,
     ConfigPage,
     LoginPage,
-    ColetarPage
+    ColetarPage,
+    ListPage,
+    SincronizarPage
   ],
   imports: [
     BrowserModule,
@@ -36,7 +40,8 @@ import { CargaService } from "../providers/carga-service";
     HomePage,
     ConfigPage,
     LoginPage,
-    ColetarPage
+    ColetarPage,
+    SincronizarPage
   ],
   providers: [
     StatusBar,
@@ -46,7 +51,8 @@ import { CargaService } from "../providers/carga-service";
     ProdutoService,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthService,
-    CargaService
+    CargaService,
+    ListPage
   ]
 })
 export class AppModule {}

@@ -11,7 +11,7 @@ import {Observable} from 'rxjs/Observable';
 export class CargaService {
   private url_service: string;
   private headers: Headers;
-  private db_name: string = "siga.db";
+  private db_name: string = "inv.db";
 
   constructor(
     public http: Http,
@@ -63,7 +63,7 @@ export class CargaService {
         Promise.all([
           db.executeSql("CREATE TABLE IF NOT EXISTS filiais(id INTEGER PRIMARY KEY AUTOINCREMENT, nome VARCHAR(50), cod_filial VARCHAR(10), filial VARCHAR(100))", {}),
           db.executeSql("CREATE TABLE IF NOT EXISTS enderecos (id INTEGER PRIMARY KEY AUTOINCREMENT, filial VARCHAR(10), local VARCHAR(50), endereco VARCHAR(50))", {}),
-          db.executeSql("CREATE TABLE IF NOT EXISTS produtos (id INTEGER PRIMARY KEY AUTOINCREMENT, filial VARCHAR(10), codigo VARCHAR(50), descricao VARCHAR(50))", {}),
+          db.executeSql("CREATE TABLE IF NOT EXISTS produtos (id INTEGER PRIMARY KEY AUTOINCREMENT, filial VARCHAR(10), codigo VARCHAR(50), descricao VARCHAR(50), tipo VARCHAR(10), locpad VARCHAR(50))", {}),
           db.executeSql("CREATE TABLE IF NOT EXISTS inventario (id INTEGER PRIMARY KEY AUTOINCREMENT, filial VARCHAR(10), sincronizado INTEGER, codigo VARCHAR(50), doc VARCHAR(20), qtd REAL, qtd2 REAL, local VARCHAR(50), endereco VARCHAR(50), dt DATE)", {})
         ]).then(() => {
           console.log("Tabelas criadas com sucesso");
@@ -87,19 +87,21 @@ export class CargaService {
         name: this.db_name,
         location: 'default'
       }).then(db => {
-        db.transaction((tx) => {
-          for(let i=0; i<rows.length; i++) {
-            tx.executeSql('INSERT INTO filiais(nome, cod_filial, filial) VALUES(?,?,?)', [
-              rows[i].nome,
-              rows[i].cod_filial,
-              rows[i].filial,
-            ]);
-          }
-        }).then(res => {
-          resolve(true);
-        }).catch(err => {
-          console.log(err);
-          reject("Falha ao popular a tabela de filiais");
+        db.executeSql('DELETE FROM filiais', []).then(() => {
+          db.transaction((tx) => {
+            for(let i=0; i<rows.length; i++) {
+              tx.executeSql('INSERT INTO filiais(nome, cod_filial, filial) VALUES(?,?,?)', [
+                rows[i].nome,
+                rows[i].cod_filial,
+                rows[i].filial,
+              ]);
+            }
+          }).then(res => {
+            resolve(true);
+          }).catch(err => {
+            console.log(err);
+            reject("Falha ao popular a tabela de filiais");
+          });
         });
       });
 
@@ -114,19 +116,21 @@ export class CargaService {
         name: this.db_name,
         location: 'default'
       }).then(db => {
-        db.transaction((tx) => {
-          for(let i=0; i<rows.length; i++) {
-            tx.executeSql('INSERT INTO enderecos(filial, local, endereco) VALUES(?,?,?)', [
-              rows[i].filial,
-              rows[i].local,
-              rows[i].endereco,
-            ]);
-          }
-        }).then(res => {
-          resolve(true);
-        }).catch(err => {
-          console.log(err);
-          reject("Falha ao popular a tabela de endereços");
+        db.executeSql('DELETE FROM enderecos', []).then(() => { 
+          db.transaction((tx) => {
+            for(let i=0; i<rows.length; i++) {
+              tx.executeSql('INSERT INTO enderecos(filial, local, endereco) VALUES(?,?,?)', [
+                rows[i].filial,
+                rows[i].local,
+                rows[i].endereco,
+              ]);
+            }
+          }).then(res => {
+            resolve(true);
+          }).catch(err => {
+            console.log(err);
+            reject("Falha ao popular a tabela de endereços");
+          });
         });
       });
       resolve(true);
@@ -143,24 +147,27 @@ export class CargaService {
         name: this.db_name,
         location: 'default'
       }).then(db => {
-        db.transaction((tx) => {
-          for(let i=0; i<rows.length; i++) {
-            console.log(rows[i]);
-            tx.executeSql('INSERT INTO produtos(filial, codigo, descricao) VALUES(?,?,?)', [
-              rows[i].filial,
-              rows[i].codigo,
-              rows[i].descricao,
-            ]);
-          }
-        }).then(res => {
-          console.log(res);
-          db.executeSql('select * from produtos', []).then(data => {
-            console.log(data.rows);
+        db.executeSql('DELETE FROM produtos', []).then(() => { 
+          db.transaction((tx) => {
+            for(let i=0; i<rows.length; i++) {
+              tx.executeSql('INSERT INTO produtos(filial, codigo, descricao, tipo, locpad) VALUES(?,?,?,?,?)', [
+                rows[i].filial,
+                rows[i].codigo,
+                rows[i].descricao,
+                rows[i].tipo,
+                rows[i].locpad
+              ]);
+            }
+          }).then(res => {
+            console.log(res);
+            db.executeSql('select * from produtos', []).then(data => {
+              console.log(data.rows);
+            });
+            resolve(true);
+          }).catch(err => {
+            console.log(err);
+            reject("Falha ao popular a tabela de produtos");
           });
-          resolve(true);
-        }).catch(err => {
-          console.log(err);
-          reject("Falha ao popular a tabela de produtos");
         });
       });
     });
