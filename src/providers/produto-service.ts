@@ -39,8 +39,8 @@ export class ProdutoService {
             filial: rs.rows.item(0).filial,
             produto: rs.rows.item(0).codigo,
             doc: rs.rows.item(0).doc,
-            qtd: rs.rows.item(0).qtd,
-            qtd2: rs.rows.item(0).qtd2,
+            qtd: rs.rows.item(0).qtd.toString(),
+            qtd2: rs.rows.item(0).qtd2.toString(),
             local: rs.rows.item(0).local,
             endereco: rs.rows.item(0).endereco
           };
@@ -52,6 +52,7 @@ export class ProdutoService {
             let headers = new Headers();
             let token = localStorage.getItem('token');
             headers.append("Authorization", "Basic " + token);
+            headers.append("Content-Type", "application/json");
             this.http.post(url + '/RECEBEDADOSINV/', data, {headers: headers})
             .map(rs => rs.json())
             .timeout(20000)

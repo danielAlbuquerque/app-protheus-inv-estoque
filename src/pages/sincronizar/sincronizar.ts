@@ -42,6 +42,7 @@ export class SincronizarPage {
                 subTitle: "Sincronizado com sucesso",
                 buttons: ['OK']
               }).present();
+              load.dismiss();
             }).catch(err => {
               console.log(err);
               this.alertCtrl.create({
