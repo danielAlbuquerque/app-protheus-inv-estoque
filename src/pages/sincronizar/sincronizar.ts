@@ -37,6 +37,7 @@ export class SincronizarPage {
             load.present();
             this.prodService.sync(id).then(rs => {
               console.log(rs);
+              this.loadInv();
               this.alertCtrl.create({
                 title: 'Inventário',
                 subTitle: "Sincronizado com sucesso",

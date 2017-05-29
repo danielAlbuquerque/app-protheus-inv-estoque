@@ -16,7 +16,7 @@ export class ConfigPage {
   save() {
     localStorage.setItem('URL_SERVIDOR', this.URI);
     this.toastCtrl.create({
-      message: 'Configura�ao salva com sucesso',
+      message: 'Configuração salva com sucesso',
       duration: 3000,
       position: 'bottom'
     }).present();
