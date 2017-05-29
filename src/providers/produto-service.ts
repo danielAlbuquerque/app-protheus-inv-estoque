@@ -59,7 +59,7 @@ export class ProdutoService {
             .subscribe(response => {
               console.log(response);
               this.sqlite.create({name: this.db_name, location: 'default'}).then(db => {
-                db.executeSql('UPDATE inventario SET sincronizado = 0 where id = ?', [id]).then(() => {
+                db.executeSql('UPDATE inventario SET sincronizado = 1 where id = ?', [id]).then(() => {
                   resolve(response);
                 });
               });
