@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
+import { SQLite } from '@ionic-native/sqlite';
 import { LoadingController } from "ionic-angular";
 
 @Component({

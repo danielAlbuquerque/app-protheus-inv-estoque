@@ -21,6 +21,7 @@ export class CargaService {
     this.headers = new Headers();
     let token = localStorage.getItem('token');
     this.headers.append("Authorization", "Basic " + token);
+    console.log(token);
   }
 
   initCarga() {

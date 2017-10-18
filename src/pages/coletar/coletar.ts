@@ -53,13 +53,13 @@ export class ColetarPage {
           local: this.produto.locpad,
           endereco: this.endereco.toUpperCase()
         };
-        if(data.qtd < 1 || isNaN(data.qtd)) {
+        /*if(data.qtd < 1 || isNaN(data.qtd)) {
           this.alertCtrl.create({
             title: 'Erro',
             subTitle: 'A quantidade informada é inválida',
             buttons: ['OK']
 				  }).present();  
-        }
+        }*/
         this.ProdService.salvarInv(data).then(res => {
           this.toastCtrl.create({
             message: 'Registro salvo com sucesso',

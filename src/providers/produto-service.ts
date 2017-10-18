@@ -6,7 +6,6 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class ProdutoService {
 
-  private db: SQLiteObject;
   private db_name: string = "inv.db";
 
   constructor(public http: Http, private sqlite: SQLite ) {
